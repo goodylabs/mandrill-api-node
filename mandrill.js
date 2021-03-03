@@ -61,7 +61,7 @@
           });
           return res.on('end', function() {
             var e, error;
-            var responseBeforeParse = json;
+            var unparsedResponse = json;
             try {
               json = JSON.parse(json);
             } catch (error) {
@@ -70,7 +70,7 @@
                 status: 'error',
                 name: 'GeneralParseError',
                 message: e,
-                response: responseBeforeParse
+                response: unparsedResponse
               };
             }
             if (json == null) {
