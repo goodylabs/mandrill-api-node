@@ -61,20 +61,22 @@
           });
           return res.on('end', function() {
             var e, error;
+            var responseBeforeParse = json;
             try {
               json = JSON.parse(json);
             } catch (error) {
               e = error;
               json = {
                 status: 'error',
-                name: 'GeneralError',
-                message: e
+                name: 'GeneralParseError',
+                message: e,
+                response: responseBeforeParse
               };
             }
             if (json == null) {
               json = {
                 status: 'error',
-                name: 'GeneralError',
+                name: 'NullResponseError',
                 message: 'An unexpected error occurred'
               };
             }
